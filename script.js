@@ -29,32 +29,6 @@ function operate(op,a,b){
     }
 }
 
-
-/* LOGIC FOR CALC
- *  var to store the operator, the 2 numbers, answer
- *  know when to execute operator
- *  display answer
- * 
- *  need to use if statements
- *  default: click numbers
- *  if operator clicked (+-x/),  
- *      get ready for new arg input
- *      update screen-operate
- *      clear screen-next and replace with new input
- * 
- *      if operator clicked (+-x/)
- *          update screen-operate
- *          show answer on screen-next
- *      else if (=) clicked
- *          update screen-operate
- *          show answer on screen-next
- * 
- * 
- *  maybe need use arrays to store the values that pop up in display
- *  otherwise how to use the delete function
- *  cancel last, try using str.slice first instead.
-*/
-
 // NUMBER & OPERATOR VARIABLES  
 let num1 = '';
 let num2 = '';
@@ -62,7 +36,8 @@ let op = '';
 
 // DOM objects
 let nBtnsList = document.querySelectorAll('.nbtn');
-let opBtnsList = document.querySelectorAll('.op-btn')
+let opBtnsList = document.querySelectorAll('.op-btn');
+let equalsBtn = document.querySelector('#equals');
 
 let nextScreen = document.querySelector('#screen-next');
 let operateScreen = document.querySelector('#screen-operate');
@@ -106,7 +81,7 @@ opBtnsList.forEach((opBtn) => {
         if(!shouldOperateNext){
             op = opBtn.textContent;
             num1 = nextScreen.textContent;
-            operateScreen.textContent = nextScreen.textContent + " " + op;
+            operateScreen.textContent = `${num1} ${op}`;
 
             shouldClearScreen = true;
         }
@@ -116,11 +91,26 @@ opBtnsList.forEach((opBtn) => {
             let answer = operate(op,num1,num2);
             nextScreen.textContent = answer;
             op = opBtn.textContent;
-            operateScreen.textContent = answer + " " + op;
+            operateScreen.textContent = `${answer} ${op}`;
 
             num1=answer;
             shouldClearScreen = true;
         }
-        
+        // when equals button is clicked
+        equalsBtn.addEventListener("click", () => {
+            if(shouldOperateNext){
+                num2 = nextScreen.textContent;
+                let answer = operate(op,num1,num2);
+                nextScreen.textContent = answer;
+                operateScreen.textContent = `${num1} ${op} ${num2} =`;  
+
+                shouldOperateNext = false;
+                op = '';
+                num2 = '';
+            }
+            else{
+                return;
+            }
+        })
     })
 })
