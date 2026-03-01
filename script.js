@@ -9,25 +9,34 @@ function multiply(a,b){
     return a*b;
 }
 function divide(a,b){
-    if (b===0){
+    if (+b===0){
         alert("You can't divide by 0");
         return;
     }
     return a/b;
 }
 // OPERATE FUNCTION
-function operate(op,a,b){
+function operate(op, a, b) {
+    let result;
+    
     switch(op){
         case "÷":
-            return divide(a,b);
+            result = divide(a,b);
+            break;
         case "x":
-            return multiply(a,b);
+            result = multiply(a,b);
+            break;
         case "-":
-            return subtract(a,b);
+            result = subtract(a,b);
+            break;
         case "+":
-            return add(a,b);
+            result = add(a,b);
+            break;
     }
+    // Round to 3 decimal places
+    return Math.round(result * 1000) / 1000;
 }
+
 
 // NUMBER & OPERATOR VARIABLES  
 let num1 = '';
@@ -70,6 +79,9 @@ clear.addEventListener("click", () => {
     operateScreen.textContent = '';
     shouldClearScreen = false;
     shouldOperateNext = false;
+    num1 = '';
+    num2 = '';
+    op = '';
 })
 dlt.addEventListener("click", () => {
     nextScreen.textContent = nextScreen.textContent.slice(0,-1);
@@ -104,9 +116,10 @@ opBtnsList.forEach((opBtn) => {
                 nextScreen.textContent = answer;
                 operateScreen.textContent = `${num1} ${op} ${num2} =`;  
 
-                shouldOperateNext = false;
                 op = '';
                 num2 = '';
+                shouldOperateNext = false;
+                shouldClearScreen = true;
             }
             else{
                 return;
