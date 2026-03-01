@@ -111,6 +111,7 @@ opBtnsList.forEach((opBtn) => {
         }
     })
 })
+
 // when equals button is clicked
 equalsBtn.addEventListener("click", () => {
     if(shouldOperateNext){
@@ -123,8 +124,5 @@ equalsBtn.addEventListener("click", () => {
         num2 = '';
         shouldOperateNext = false;
         shouldClearScreen = true;
-    }
-    else{
-        return;
     }
 })
