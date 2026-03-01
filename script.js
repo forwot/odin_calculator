@@ -107,23 +107,24 @@ opBtnsList.forEach((opBtn) => {
 
             num1=answer;
             shouldClearScreen = true;
+            shouldOperateNext = false;
         }
-        // when equals button is clicked
-        equalsBtn.addEventListener("click", () => {
-            if(shouldOperateNext){
-                num2 = nextScreen.textContent;
-                let answer = operate(op,num1,num2);
-                nextScreen.textContent = answer;
-                operateScreen.textContent = `${num1} ${op} ${num2} =`;  
-
-                op = '';
-                num2 = '';
-                shouldOperateNext = false;
-                shouldClearScreen = true;
-            }
-            else{
-                return;
-            }
-        })
     })
+})
+// when equals button is clicked
+equalsBtn.addEventListener("click", () => {
+    if(shouldOperateNext){
+        num2 = nextScreen.textContent;
+        let answer = operate(op,num1,num2);
+        nextScreen.textContent = answer;
+        operateScreen.textContent = `${num1} ${op} ${num2} =`;  
+
+        op = '';
+        num2 = '';
+        shouldOperateNext = false;
+        shouldClearScreen = true;
+    }
+    else{
+        return;
+    }
 })
