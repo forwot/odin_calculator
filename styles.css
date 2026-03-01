@@ -13,11 +13,24 @@ html{
     align-items: center;
     flex-wrap: wrap;
 }
+
 .screen-container{
     width: 300px;
     height: 120px;
     background-color: #f6f6f6; ;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
+#screen-next, 
+#screen-operate{
+    display: flex;
+    justify-content: right;
+    width: 300px;
+    height: 40px;
+    border: 3px solid black;
+}
+
 
 .buttons-container{
     width: 300px;
